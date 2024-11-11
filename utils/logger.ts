@@ -1,4 +1,4 @@
-import * as winston from "winston";
+import * as winston from "npm:winston@3.17.0";
 
 /**
  * Enum representing different log levels.
