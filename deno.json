@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "strict": true
+  },
+  "imports": {
+    "@std/expect": "jsr:@std/expect@^1.0.7",
+    "winston": "npm:winston@^3.17.0"
+  },
+  "tasks": {
+    "check:strict": "deno check utils/* tests/* && deno lint utils/* tests/*"
+  }
+}
