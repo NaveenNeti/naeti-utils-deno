@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:14
+    container_name: postgrsql
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: localhost
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U username -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  postgres_data:
+
+#docker-compose -f docker-compose.yml -f https://raw.githubusercontent.com/user/repository/branch/path/to/override.yml up
