@@ -106,5 +106,4 @@ const client = new PgClient({
   }
   
   export { PostgresClient };
-  export default client;
   
