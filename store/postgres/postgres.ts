@@ -9,7 +9,7 @@ const client = new PgClient({
     password: Deno.env.get('DB_PASS') || 'postgres',
     database: Deno.env.get('DB_NAME') || 'postgres',
     hostname: Deno.env.get('DB_HOST') || 'localhost',
-    port: 5432, // PostgreSQL default port
+    port: 5432,
   });
   
   /**
