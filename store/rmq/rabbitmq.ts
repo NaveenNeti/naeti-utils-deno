@@ -1,4 +1,4 @@
-import { AmqpConnection, connect, type AmqpConnectOptions } from "https://deno.land/x/amqp/mod.ts";
+import { AmqpConnection, connect, type AmqpConnectOptions } from "https://deno.land/x/amqp@v0.23.1/mod.ts";
 
 const client = await connect({
     hostname: Deno.env.get('RABBITMQ_HOST') || 'localhost',
