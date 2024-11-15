@@ -11,9 +11,6 @@ interface ClientOptions {
     auth?: ClientAuth
 }
 
-const esClient = new EsClient({ node: 
-    Deno.env.get('ELASTICSEARCH_URL') || 'http://localhost:9200' });
-
 class ElasticsearchClient {
     private client: EsClient;
 
@@ -22,7 +19,8 @@ class ElasticsearchClient {
     }
 
     static getDefaultClient(): ElasticsearchClient {
-        return new ElasticsearchClient(esClient);
+        return new ElasticsearchClient(new EsClient({ node: 
+            Deno.env.get('ELASTICSEARCH_URL') || 'http://localhost:9200' }));
     }
 
     static getClientWithConfig(config: ClientOptions): ElasticsearchClient {

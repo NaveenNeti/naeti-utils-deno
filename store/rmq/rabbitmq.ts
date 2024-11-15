@@ -1,13 +1,5 @@
 import { AmqpConnection, connect, type AmqpConnectOptions } from "https://deno.land/x/amqp@v0.23.1/mod.ts";
 
-const client = await connect({
-    hostname: Deno.env.get('RABBITMQ_HOST') || 'localhost',
-    username: Deno.env.get('RABBITMQ_USER') || 'admin',
-    password: Deno.env.get('RABBITMQ_PASS') || 'admin',
-    vhost: Deno.env.get('RABBITMQ_VHOST') || '/',
-    port: 5672,
-});
-
 class RabbitMQClient {
     private client: AmqpConnection;
 
@@ -15,8 +7,14 @@ class RabbitMQClient {
         this.client = client;
     }
 
-    static getDefaultClient(): RabbitMQClient {
-        return new RabbitMQClient(client);
+    static async getDefaultClient(): Promise<RabbitMQClient> {
+        return new RabbitMQClient(await connect({
+            hostname: Deno.env.get('RABBITMQ_HOST') || 'localhost',
+            username: Deno.env.get('RABBITMQ_USER') || 'admin',
+            password: Deno.env.get('RABBITMQ_PASS') || 'admin',
+            vhost: Deno.env.get('RABBITMQ_VHOST') || '/',
+            port: 5672,
+        }));
     }
 
     static async getClientWithConfig(config: AmqpConnectOptions): Promise<RabbitMQClient> {
